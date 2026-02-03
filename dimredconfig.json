@@ -1,0 +1,194 @@
+{
+  "TruncatedSVD": {
+    "label": "Truncated SVD (linear)",
+    "class": "TruncatedSVD",
+    "params": {
+      "n_iter": {
+        "type": "int_slider",
+        "label": "Power iterations",
+        "default": 7,
+        "min": 1,
+        "max": 20,
+        "tooltip": "Number of power iterations"
+      },
+      "random_state": {
+        "type": "int_text",
+        "label": "Random state",
+        "default": 42,
+        "tooltip": "Random seed"
+      }
+    }
+  },
+
+  "UMAP": {
+    "label": "UMAP (nonlinear)",
+    "class": "UMAP",
+    "params": {
+      "n_neighbors": {
+        "type": "int_slider",
+        "label": "Neighbors",
+        "default": 15,
+        "min": 2,
+        "max": 100,
+        "tooltip": "Local neighborhood size"
+      },
+      "min_dist": {
+        "type": "float_slider",
+        "label": "Min distance",
+        "default": 0.1,
+        "min": 0.0,
+        "max": 0.99,
+        "step": 0.01,
+        "tooltip": "Embedding compactness"
+      },
+      "metric": {
+        "type": "dropdown",
+        "label": "Metric",
+        "default": "cosine",
+        "options": ["cosine", "euclidean"],
+        "tooltip": "Distance metric"
+      }
+    }
+  },
+
+  "PCA": {
+    "label": "PCA (full SVD)",
+    "class": "PCA",
+    "params": {
+      "svd_solver": {
+        "type": "dropdown",
+        "label": "SVD solver",
+        "default": "auto",
+        "options": ["auto", "full", "randomized"],
+        "tooltip": "SVD algorithm"
+      },
+      "random_state": {
+        "type": "int_text",
+        "label": "Random state",
+        "default": 42,
+        "tooltip": "Random seed"
+      }
+    }
+  },
+
+  "IncrementalPCA": {
+    "label": "Incremental PCA",
+    "class": "IncrementalPCA",
+    "params": {
+      "batch_size": {
+        "type": "int_slider",
+        "label": "Batch size",
+        "default": 512,
+        "min": 64,
+        "max": 4096,
+        "tooltip": "Samples per batch"
+      }
+    }
+  },
+
+  "Isomap": {
+    "label": "Isomap (manifold)",
+    "class": "Isomap",
+    "params": {
+      "n_neighbors": {
+        "type": "int_slider",
+        "label": "Neighbors",
+        "default": 10,
+        "min": 2,
+        "max": 50,
+        "tooltip": "Neighborhood size"
+      },
+      "metric": {
+        "type": "dropdown",
+        "label": "Metric",
+        "default": "euclidean",
+        "options": ["euclidean", "cosine"],
+        "tooltip": "Distance metric"
+      }
+    }
+  },
+
+  "GaussianRandomProjection": {
+    "label": "Gaussian Random Projection",
+    "class": "GaussianRandomProjection",
+    "params": {
+      "eps": {
+        "type": "float_slider",
+        "label": "Distortion (eps)",
+        "default": 0.1,
+        "min": 0.01,
+        "max": 0.5,
+        "step": 0.01,
+        "tooltip": "Maximum distortion of pairwise distances"
+      },
+      "random_state": {
+        "type": "int_text",
+        "label": "Random state",
+        "default": 42,
+        "tooltip": "Random seed"
+      }
+    }
+  },
+
+  "SparseRandomProjection": {
+    "label": "Sparse Random Projection",
+    "class": "SparseRandomProjection",
+    "params": {
+      "density": {
+        "type": "float_slider",
+        "label": "Density",
+        "default": 0.1,
+        "min": 0.01,
+        "max": 1.0,
+        "step": 0.01,
+        "tooltip": "Density of the random projection matrix"
+      },
+      "random_state": {
+        "type": "int_text",
+        "label": "Random state",
+        "default": 42,
+        "tooltip": "Random seed"
+      }
+    }
+  }, 
+  "KernelPCA": {
+    "label": "Kernel PCA",
+    "class": "KernelPCA",
+    "params": {
+      "kernel": {
+        "type": "dropdown",
+        "label": "Kernel",
+        "default": "rbf",
+        "options": ["linear", "poly", "rbf", "sigmoid", "cosine"],
+        "tooltip": "Kernel function used to compute the kernel matrix"
+      },
+      "gamma": {
+        "type": "float_slider",
+        "label": "Gamma",
+        "default": 0.1,
+        "min": 0.001,
+        "max": 10.0,
+        "step": 0.01,
+        "tooltip": "Kernel coefficient for rbf, poly and sigmoid kernels"
+      },
+      "degree": {
+        "type": "int_slider",
+        "label": "Polynomial degree",
+        "default": 3,
+        "min": 2,
+        "max": 10,
+        "tooltip": "Degree of the polynomial kernel (poly only)"
+      },
+      "coef0": {
+        "type": "float_slider",
+        "label": "Coef0",
+        "default": 1.0,
+        "min": 0.0,
+        "max": 5.0,
+        "step": 0.1,
+        "tooltip": "Independent term in poly and sigmoid kernels"
+      }
+    }
+  }
+
+}

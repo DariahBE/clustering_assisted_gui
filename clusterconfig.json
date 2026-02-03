@@ -1,0 +1,127 @@
+{
+  "HDBSCAN": {
+    "label": "HDBSCAN (density-based)",
+    "class": "HDBSCAN",
+    "supports_noise": true,
+    "noise_extension": {
+      "enabled_by_default": true,
+      "label": "Extend noise points",
+      "tooltip": "Iteratively assign noise points to nearest non-noise cluster"
+    },
+    "params": {
+      "min_cluster_size": {
+        "type": "int_slider",
+        "label": "Min cluster size",
+        "default": 15,
+        "min": 5,
+        "max": 200,
+        "tooltip": "Minimum size of clusters"
+      }, 
+      "min_samples": {
+        "type": "int_slider",
+        "label": "Min samples",
+        "default": 5,
+        "min": 1,
+        "max": 50,
+        "tooltip": "Controls cluster conservativeness"
+      },
+      "metric": {
+        "type": "dropdown",
+        "label": "Distance metric",
+        "default": "euclidean",
+        "options": ["euclidean", "manhattan", "l2", "p", "cityblock", "l1", "chebyshev", "hamming", "canberra", "dice", "haversine"],
+        "tooltip": "Distance metric"
+      },
+      "cluster_selection_method": {
+        "type": "dropdown",
+        "label": "Selection method",
+        "default": "eom",
+        "options": ["eom", "leaf"],
+        "tooltip": "Cluster extraction strategy"
+      }, 
+      "cluster_selection_epsilon": {
+        "type": "float_slider", 
+        "label": "Cluster distance treshold", 
+        "default": 0.0, 
+        "tooltip": "Merge clusters closer than the defined treshold", 
+        "min": 0.0, 
+        "max": 3.0
+      }
+    }
+  },
+
+  "KMeans": {
+    "label": "KMeans (baseline)",
+    "class": "KMeans",
+    "supports_noise": false,
+    "params": {
+      "n_clusters": {
+        "type": "int_slider",
+        "label": "Number of clusters",
+        "default": 10,
+        "min": 2,
+        "max": 100,
+        "tooltip": "Number of clusters"
+      },
+      "random_state": {
+        "type": "int_text",
+        "label": "Random state",
+        "default": 42,
+        "tooltip": "Random seed"
+      }
+    }
+  }, 
+
+    "OPTICS": {
+    "label": "OPTICS (density-based)",
+    "class": "OPTICS",
+    "supports_noise": true,
+    "noise_extension": {
+        "enabled_by_default": false,
+        "label": "Extend noise points",
+        "tooltip": "Iteratively assign noise points to nearest non-noise cluster"
+    },
+    "params": {
+        "min_samples": {
+        "type": "int_slider",
+        "label": "Min samples",
+        "default": 5,
+        "min": 2,
+        "max": 50,
+        "tooltip": "Minimum number of samples in a neighborhood"
+        },
+        "xi": {
+        "type": "float_slider",
+        "label": "Xi",
+        "default": 0.05,
+        "min": 0.01,
+        "max": 0.5,
+        "step": 0.01,
+        "tooltip": "Determines the minimum steepness for cluster boundaries"
+        },
+        "min_cluster_size": {
+        "type": "int_slider",
+        "label": "Min cluster size",
+        "default": 10,
+        "min": 2,
+        "max": 200,
+        "tooltip": "Minimum size of extracted clusters"
+        },
+        "metric": {
+        "type": "dropdown",
+        "label": "Distance metric",
+        "default": "euclidean",
+        "options": ["euclidean", "manhattan", "cosine"],
+        "tooltip": "Distance metric used for reachability"
+        },
+        "cluster_method": {
+        "type": "dropdown",
+        "label": "Cluster extraction",
+        "default": "xi",
+        "options": ["xi", "dbscan"],
+        "tooltip": "Method used to extract clusters from reachability plot"
+        }
+    }
+    }
+
+}

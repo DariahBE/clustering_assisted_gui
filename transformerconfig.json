@@ -1,0 +1,45 @@
+{
+    "models" : {
+        "qwen3": {
+            "name": "Qwen/Qwen3-Embedding-0.6B", 
+            "label": "QWEN 3", 
+            "tooltip": ""
+        }, 
+        "mpnet": {
+            "name": "sentence-transformers/all-mpnet-base-v2", 
+            "label": "MPNet", 
+            "tooltip": ""
+        }, 
+        "labse": {
+            "name": "sentence-transformers/LaBSE", 
+            "label": "LaBSE", 
+            "tooltip": ""
+        }, 
+        "gronlp": {
+            "name": "GroNLP/bert-base-dutch-cased", 
+            "label": "", 
+            "tooltip": ""
+        }, 
+        "gysbert": {
+            "name": "emanjavacas/GysBERT", 
+            "label": "", 
+            "tooltip": ""
+        }, 
+        "bge_m3": {
+            "name": "BAAI/bge-m3",
+            "label": "BGE M3 (multilingual)",
+            "tooltip": ""
+        }, 
+        "e5_multi": {
+            "name": "intfloat/multilingual-e5-base",
+            "label": "E5 Multilingual",
+            "tooltip": ""
+        }, 
+        "instructor": {
+            "name": "hkunlp/instructor-base",
+            "label": "Instructor",
+            "tooltip": "Instruction-tuned embeddings for structured clustering"
+        }
+
+    }
+}

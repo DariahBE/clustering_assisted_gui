@@ -1,0 +1,10 @@
+{
+  "nearest_iterative": {
+    "label": "Nearest neighbor (slow, precise)",
+    "description": "Iteratively assigns closest noise point to nearest cluster"
+  },
+  "nearest_batch": {
+    "label": "Nearest neighbor (fast, approximate)",
+    "description": "Assigns all noise points in one pass (future)"
+  }
+}
