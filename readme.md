@@ -2,7 +2,7 @@
 CLARIAH-tool WP6.2
 
 ## Installation: 
-1. Download repository from ()[]
+1. Download repository from [Clariah-BE Leuven github](https://github.com/DariahBE/clustering_assisted_gui)
 2. Extract repository in a folder
 3. Install a python3.12 virtual environment in that folder: `python3.12 -m venv .venv`
 4. Activate the environment:
