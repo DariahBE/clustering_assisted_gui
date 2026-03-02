@@ -66,12 +66,19 @@ class ClusterInspectorGUI:
         if not (len(names) == len(labels) == len(ext_labels)):
             return None
 
-        return pd.DataFrame({
+        df = pd.DataFrame({
             "name": names,
             "label": labels,
             "extended_label": ext_labels,
             "source": ext_sources
         })
+
+        # Apply sorting if selected
+        sort_col = self.sort_by.value
+        if sort_col in df.columns:
+            df = df.sort_values(by=sort_col, ascending=True)
+
+        return df
 
     def _active_label_column(self):
         return "extended_label" if self.label_source.value == "extended" else "label"
@@ -106,6 +113,19 @@ class ClusterInspectorGUI:
 
         self.search_box.observe(self._update_suggestions, names="value")
         self.suggestions.observe(self._inspect_selected_name, names="value")
+
+
+        self.sort_by = widgets.Dropdown(
+            options=[
+                ("No sorting", None),
+                ("Name", "name"),
+                ("Label", "label"),
+                ("Extended label", "extended_label"),
+                ("Source", "source"),
+            ],
+            value=None,
+            description="Sort by:",
+        )
 
         self.filename = widgets.Text(
             value="clusternames.csv",
@@ -245,6 +265,7 @@ class ClusterInspectorGUI:
                 self.suggestions,
                 widgets.HTML("<hr>"),
                 widgets.Label("Export options"),
+                self.sort_by,
                 self.filename,
                 self.sep,
                 self.line_end,
