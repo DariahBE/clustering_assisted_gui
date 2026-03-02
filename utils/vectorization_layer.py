@@ -64,15 +64,44 @@ class TransformerGUI:
         else:
             self.names = [x.strip() for x in self.raw_names if x.strip()]
 
+    # def _on_file_upload(self, change):
+    #     """
+    #     event listner for uploading of file. 
+    #     """
+    #     upload = change.new
+    #     if not upload:
+    #         return
+
+    #     content = upload[0].content
+    #     stream = codecs.decode(content, encoding="utf-8")
+    #     stream = stream.replace("\x0b", "")
+
+    #     self.file_contents = list(stream.splitlines())
+    #     self._parse_names()
+
+    #     with self.output:
+    #         print(f"Loaded {len(self.names)} rows")
+
+
+
     def _on_file_upload(self, change):
         """
-        event listner for uploading of file. 
+        event listener for uploading of file.
+        Made to handle COLAB and local deployment.
         """
         upload = change.new
         if not upload:
             return
 
-        content = upload[0].content
+        # Handle both list-style (Jupyter) and dict-style (Colab)
+        if isinstance(upload, dict):
+            # Google Colab style
+            filename = list(upload.keys())[0]
+            content = upload[filename]["content"]
+        else:
+            # Classic Jupyter style
+            content = upload[0].content
+
         stream = codecs.decode(content, encoding="utf-8")
         stream = stream.replace("\x0b", "")
 
@@ -80,6 +109,7 @@ class TransformerGUI:
         self._parse_names()
 
         with self.output:
+            clear_output(wait=True)
             print(f"Loaded {len(self.names)} rows")
 
     def _on_quote_toggle(self, change):
