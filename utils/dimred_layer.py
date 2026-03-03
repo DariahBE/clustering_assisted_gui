@@ -13,6 +13,26 @@ import umap
 import plotly.express as px
 
 
+#Issue with colab and plotly, this is a workaround to make it all work without breaking local deployments. 
+import sys
+import IPython
+import plotly.io as pio
+
+def configure_plotly_browser_state():
+  """https://stackoverflow.com/questions/47230817/plotly-notebook-mode-with-google-colaboratory"""
+  display(IPython.core.display.HTML('''
+        <script src="/static/components/requirejs/require.js"></script>
+        <script>
+          requirejs.config({
+            paths: {
+              base: '/static/base',
+              plotly: 'https://cdn.plot.ly/plotly-latest.min.js?noext',
+            },
+          });
+        </script>
+        '''))
+
+
 # when you add a new configartion to the JSON file, it needs to be implemented here as well.
 #   The key in ALGO_CLASSES should match the value for class in your config file. Don't forget
 #   to also import the necessary modules for the dimred to work as intended. When extending this
@@ -49,7 +69,7 @@ class DimensionalityReductionGUI:
         self.config = self._load_config(config_path)
         self.Z = None
         self.on_result = on_result
-
+        self.IN_COLAB = 'google.colab' in sys.modules
         self._build_widgets()
 
     def _load_config(self, path):
@@ -64,6 +84,10 @@ class DimensionalityReductionGUI:
         """
         Makes the UI for the user to interact with. 
         """
+        if self.IN_COLAB: 
+            configure_plotly_browser_state()
+            pio.renderers.default = 'notebook_connected'
+        
         ## add a placeholder for 'nothing selected'
         model_options = [("-", "-")] + [
             (v.get("label") or k, k)
