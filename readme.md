@@ -17,6 +17,12 @@ The tool requires a flat list of name entries you want to cluster, The order of 
 To use the tool, the notebook needs to run once from start to finish by clicking the 'run all' button. Once this has been completed, each individual step can be used in order to produce clusters of unseen data. Individual steps can be revisited as much as needed, however, downstream changes are only visible if all intermediate steps have been followed.
 e.g.: all steps have ran 1,2,3,4,5 ==> user modifies step 2 ==> to reflect the made changes in the output; the user is required to perform steps 3 and 4 in succession.  
 
+### Optional deployment to COLAB: 
+If you don't have a GPU available, you can use a free T4 tier GPU provided by Google Colab. Perform the following steps to use COLAB for clustering: 
+1) Download the notebook named `COLAB Compatible clustering notebook.ipynb` and upload it into a COLAB instance, it's recommended to use the T4 runtime. 
+2) Click the `Run all` button and wait for all cells to finish. 
+3) Interact with the notebook as if it's a local notebook (steps listed below)
+
 ### Steps explained: 
 #### step1: embeddings: 
 Here the user should upload their data to the tool anc pick one of the available transformer models (or supply a custom model). Once all choices are made, the input list which consists of strings will be vectorized into a format which clustering algorithms can understand. A good first candidate is LABSE.
