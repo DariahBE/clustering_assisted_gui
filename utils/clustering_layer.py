@@ -22,6 +22,26 @@ CLUSTERING_CLASSES = {
 }
 
 
+#Issue with colab and plotly, this is a workaround to make it all work without breaking local deployments. 
+import sys
+import IPython
+import plotly.io as pio
+
+def configure_plotly_browser_state():
+  """https://stackoverflow.com/questions/47230817/plotly-notebook-mode-with-google-colaboratory"""
+  display(IPython.core.display.HTML('''
+        <script src="/static/components/requirejs/require.js"></script>
+        <script>
+          requirejs.config({
+            paths: {
+              base: '/static/base',
+              plotly: 'https://cdn.plot.ly/plotly-latest.min.js?noext',
+            },
+          });
+        </script>
+        '''))
+
+
 class Clustermachine:
     """
     Clustering GUI.
@@ -34,6 +54,8 @@ class Clustermachine:
         self.config = self._load_config(config_path)
         self.on_result = on_result
         self.originalstringgetter = stringgetter
+
+        self.IN_COLAB = 'google.colab' in sys.modules
 
         self.X = None
         self.df = None
@@ -59,6 +81,10 @@ class Clustermachine:
             Build widgets safely without assuming reduced data exists.
             Axis controls are created lazily once valid data is available.
         """
+        if self.IN_COLAB: 
+            configure_plotly_browser_state()
+            pio.renderers.default = 'notebook_connected'
+
         self.method = widgets.Dropdown(
             options=[(v["label"], k) for k, v in self.config.items()],
             description="Clustering:",

@@ -8,6 +8,27 @@ import ipywidgets as widgets
 from IPython.display import display
 
 
+
+#Issue with colab and plotly, this is a workaround to make it all work without breaking local deployments. 
+import sys
+import IPython
+import plotly.io as pio
+
+def configure_plotly_browser_state():
+  """https://stackoverflow.com/questions/47230817/plotly-notebook-mode-with-google-colaboratory"""
+  display(IPython.core.display.HTML('''
+        <script src="/static/components/requirejs/require.js"></script>
+        <script>
+          requirejs.config({
+            paths: {
+              base: '/static/base',
+              plotly: 'https://cdn.plot.ly/plotly-latest.min.js?noext',
+            },
+          });
+        </script>
+        '''))
+
+
 class DimensionVisualizer:
     """
     Visualizes per-dimension variability for a dataset fetched live via a datafetcher.
@@ -24,6 +45,7 @@ class DimensionVisualizer:
         self.normalize = normalize
 
         # UI state
+        self.IN_COLAB = 'google.colab' in sys.modules
         self.sort_dim = None
         self.sort_dropdown = None
 
@@ -183,6 +205,9 @@ class DimensionVisualizer:
 
     def display(self):
         """Render UI in the notebook. """
+        if self.IN_COLAB: 
+            configure_plotly_browser_state()
+            pio.renderers.default = 'notebook_connected'
         heatmap_output = widgets.Output()
         lineplot_output = widgets.Output()
 
